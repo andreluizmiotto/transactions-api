@@ -1,5 +1,11 @@
 #!/bin/bash
+set -e
+
 echo "Building and starting application..."
-docker-compose up --build -d
-echo "Application running at http://localhost:8080"
-echo "Swagger UI at http://localhost:8080/swagger-ui.html"
+echo "Press Ctrl+C to stop the application and shut down containers."
+echo ""
+
+docker compose up --build
+
+echo ""
+echo "Application stopped."
