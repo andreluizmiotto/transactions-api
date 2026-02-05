@@ -1,7 +1,7 @@
 package com.challenge.transactions.api.controller;
 
+import com.challenge.transactions.api.dto.AccountResponse;
 import com.challenge.transactions.api.dto.CreateAccountRequest;
-import com.challenge.transactions.domain.entity.Account;
 import com.challenge.transactions.service.AccountService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -17,13 +17,17 @@ public class AccountController {
     }
 
     @PostMapping
-    public Account createAccount(@RequestBody @Valid CreateAccountRequest accountRequest) {
-        return accountService.create(accountRequest);
+    public AccountResponse createAccount(@RequestBody @Valid CreateAccountRequest accountRequest) {
+        return AccountResponse.fromAccount(
+                accountService.create(accountRequest)
+        );
     }
 
     @GetMapping("/{accountId}")
-    public Account getAccount(@PathVariable Long accountId) {
-        return accountService.findById(accountId);
+    public AccountResponse getAccount(@PathVariable Long accountId) {
+        return AccountResponse.fromAccount(
+                accountService.findById(accountId)
+        );
     }
 
 }

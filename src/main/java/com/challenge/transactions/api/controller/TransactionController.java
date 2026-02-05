@@ -1,7 +1,7 @@
 package com.challenge.transactions.api.controller;
 
 import com.challenge.transactions.api.dto.CreateTransactionRequest;
-import com.challenge.transactions.domain.entity.Transaction;
+import com.challenge.transactions.api.dto.TransactionResponse;
 import com.challenge.transactions.service.TransactionService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,8 +20,10 @@ public class TransactionController {
     }
 
     @PostMapping
-    public Transaction createTransaction(@RequestBody @Valid CreateTransactionRequest transactionRequest) {
-        return transactionService.create(transactionRequest);
+    public TransactionResponse createTransaction(@RequestBody @Valid CreateTransactionRequest transactionRequest) {
+        return TransactionResponse.fromTransaction(
+                transactionService.create(transactionRequest)
+        );
     }
 
 }
